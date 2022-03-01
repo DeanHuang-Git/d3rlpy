@@ -72,6 +72,7 @@ def _make_batches(
 def true_Q(algo: AlgoProtocol, episodes: List[Episode]) -> float:
     r"""Calculate True Q Value for AIPI590 Assignment 3
     """
+    true_values = []
     for episode in episodes:
         for batch in _make_batches(episode, WINDOW_SIZE, algo.n_frames):
             actions = algo.predict([batch.observations[0]])
@@ -81,8 +82,8 @@ def true_Q(algo: AlgoProtocol, episodes: List[Episode]) -> float:
             if algo.reward_scaler:
                 rewards = algo.reward_scaler.transform_numpy(rewards)
             y = rewards + algo.gamma * cast(np.ndarray, values) * mask
-            print(y)
-    return float(np.mean(y))
+            true_values.append(np.mean(y))
+    return float(np.mean(true_values))
 
 def td_error_scorer(algo: AlgoProtocol, episodes: List[Episode]) -> float:
     r"""Returns average TD error.
