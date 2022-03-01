@@ -70,8 +70,8 @@ def _make_batches(
         yield batch
 
 def true_Q(algo: AlgoProtocol, episodes: List[Episode]) -> float:
-        r"""Calculate True Q Value for AIPI590 Assignment 3
-        """
+    r"""Calculate True Q Value for AIPI590 Assignment 3
+    """
     total_values = []
     for episode in episodes:
         for batch in _make_batches(episode, WINDOW_SIZE, algo.n_frames):
