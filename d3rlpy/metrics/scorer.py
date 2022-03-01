@@ -81,7 +81,7 @@ def true_Q(algo: AlgoProtocol, episodes: List[Episode]) -> float:
             if algo.reward_scaler:
                 rewards = algo.reward_scaler.transform_numpy(rewards)
             y = rewards + algo.gamma * cast(np.ndarray, values) * mask
-            total_values.append(y)
+            print(y)
     return float(np.mean(y))
 
 def td_error_scorer(algo: AlgoProtocol, episodes: List[Episode]) -> float:
