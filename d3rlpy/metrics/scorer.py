@@ -81,7 +81,7 @@ def true_Q(algo: AlgoProtocol, episodes: List[Episode]) -> float:
             rewards = np.asarray(batch.rewards).reshape(-1)
             if algo.reward_scaler:
                 rewards = algo.reward_scaler.transform_numpy(rewards)
-            y = rewards + algo.gamma * cast(np.ndarray, next_values) * mask
+            y = rewards + algo.gamma * cast(np.ndarray, values) * mask
             total_values.append(y)
     return float(np.mean(total_values))
 
